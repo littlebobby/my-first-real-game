@@ -5,7 +5,7 @@ class Obstacle {
   }
   createObstacle() {
     for(let i = 4; i < 28; i ++) {
-      for (let j = 4; j < 16; j ++) {
+      for (let j = 0; j < 20; j ++) {
         this.createRect(i*25, j*25);
       }
     }

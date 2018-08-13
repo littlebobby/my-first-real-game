@@ -44,6 +44,7 @@ const update = () => {
   updateBullet()
   p1_bulletHit()
   p2_bulletHit()
+  // console.log(keys)
 }
 
 // create bullet 
@@ -104,35 +105,28 @@ const p2_bulletHit = () => {
 }
 
 // move player
-document.onkeydown = (e) => {
-  console.log(p1)
-  switch(e.keyCode) {
-    // p1
-    case 87: p1.moveUp(); break;
-    case 83: p1.moveDown(); break;
-    case 65: p1.moveLeft(); break;
-    case 68: p1.moveRight(); break;
-    // p2
-    case 38: p2.moveUp(); break;
-    case 40: p2.moveDown(); break;
-    case 37: p2.moveLeft(); break;
-    case 39: p2.moveRight(); break;
-
-    // p1 shoot F
-    case 70: createBullet(p1.x + p1.width, p1.y + p1.height/2 + 0.5); break;
-    // p2 shoot P
-    case 80: createBullet(p2.x, p2.y + p2.height/2 + 0.5, false); break;
-  }
+const keys = {};
+document.addEventListener('keydown', (e) => {
+  keys[e.keyCode] = true;
+  keyPressed()
+})
+document.addEventListener('keyup', (e) => {
+  delete keys[e.keyCode];
+})
+const keyPressed = () => {
+  // P1
+  if (keys[87]) { p1.moveUp() }
+  if (keys[83]) { p1.moveDown() }
+  if (keys[65]) { p1.moveLeft() }
+  if (keys[68]) { p1.moveRight() }
+  if (keys[70]) { createBullet(p1.x + p1.width, p1.y + p1.height/2 + 0.5) }
+  // P2
+  if (keys[38]) { p2.moveUp() }
+  if (keys[40]) { p2.moveDown() }
+  if (keys[37]) { p2.moveLeft() }
+  if (keys[39]) { p2.moveRight() }
+  if (keys[80]) { createBullet(p2.x, p2.y + p2.height/2 + 0.5, false) }
 }
-
-// document.onkeydown = (e) => {
-//   switch(e.keyCode) {
-//     case 38: p2.moveUp(); break;
-//     case 40: p2.moveDown(); break;
-//     case 37: p2.moveLeft(); break;
-//     case 39: p2.moveRight(); break;
-//   }
-// }
 
 
 

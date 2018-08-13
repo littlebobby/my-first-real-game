@@ -14,8 +14,6 @@ class Player {
   }
 
   updatePlayer(ctx, color='black') {
-    
-    // ctx.clearRect(this.x, this.y, this.width, this.height);
     this.x += this.speedX;
     this.y += this.speedY;
     this.speedX = 0;
