@@ -3,4 +3,11 @@
   border-radius: 10px;
   display: block;
   margin: 0 auto;
+  color: white;
+}
+.btn-start {
+  background: green;
+}
+.btn-stop {
+  background: red;
 }

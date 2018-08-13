@@ -1,5 +1,5 @@
 class Player {
-  constructor(x=0, y=250, width=25, height=25, color='red') {
+  constructor(x=0, y=250, width=25, height=25, color='orange') {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -14,9 +14,8 @@ class Player {
   }
 
   updatePlayer(ctx, color='black') {
-    console.log('hi');
     
-    ctx.clearRect(this.x, this.y, this.width, this.height);
+    // ctx.clearRect(this.x, this.y, this.width, this.height);
     this.x += this.speedX;
     this.y += this.speedY;
     this.speedX = 0;
