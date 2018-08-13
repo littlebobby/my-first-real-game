@@ -19,14 +19,8 @@ class Obstacle {
     this.ctx.fillStyle = 'green';
     this.ctx.fillRect(x+3, y+3, 19, 19);
   }
-  // top() { return this.y }
-  // bottom() { return this.y + this.height }
-  // left() {return this.x }
-  // right() {return this.x + this.width }
 
   updateObstacle() {
-    // this.ctx.clearRect(100, 100, 600, 300)
-    // console.log(this.obs_arr)
     this.obs_arr.forEach(i => {
       this.ctx.fillStyle = 'white';
       this.ctx.fillRect(i.x, i.y, 25, 25);

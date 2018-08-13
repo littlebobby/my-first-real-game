@@ -25,15 +25,15 @@ class Player {
   }
   
   moveUp() {
-    this.speedY = -25;
+    if(this.y > 0) { this.speedY = -25; }
   }
   moveDown() {
-    this.speedY = 25;
+    if(this.y < 475) { this.speedY = 25; }
   }
   moveRight() {
-    this.speedX = 25;
+    if(this.x < 775) { this.speedX = 25; }
   }
   moveLeft() {
-    this.speedX = -25;
+    if(this.x > 0) { this.speedX = -25; }  
   }
 }
