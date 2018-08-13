@@ -30,5 +30,4 @@ class Bullet {
               this.left() > o.x + o.width ||
               this.right() < o.x))
   }
-
 }

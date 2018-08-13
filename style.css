@@ -11,3 +11,7 @@
 .btn-stop {
   background: red;
 }
+.btn-restart {
+  background: blue;
+  display: none;
+}
