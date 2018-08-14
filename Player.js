@@ -58,7 +58,6 @@ class Player {
           this.bullet_arr.splice(b_index, 1);
           obstacle.obs_arr.splice(o_index, 1);
         } 
-        // console.log('not hit border')
       })
       // hit border
       if (b.x + b.width > 800 || b.x < 0 || b.y < 0 || b.y + b.height > 500) {
@@ -67,11 +66,11 @@ class Player {
       }
       // hit player
       if (b.shootSth(player)) {
-        myGameArea.clear()
         ctx.fillStyle = 'red'
         ctx.font = "30px Arial";
         ctx.fillText("↓You dead!!", player.x, player.y);
         player.isDead = true;
+        myGameArea.reborn()
       } 
     })
   }

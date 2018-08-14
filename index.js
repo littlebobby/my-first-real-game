@@ -37,6 +37,7 @@ restart_btn.onclick = () => {
 
 const myGameArea = {
   start() {
+    revivePlayer.style['display'] = 'none';
     p1.createPlayer(ctx);
     p2.createPlayer(ctx);
   },
@@ -47,6 +48,7 @@ const myGameArea = {
     clearInterval(this.interval);
   },
   reborn() {
+    this.clear()
     if (p1.isDead) {
       revivePlayer.innerHTML = 'player1 REBORN';
     } else {
@@ -56,13 +58,13 @@ const myGameArea = {
   }
 }
 
-// start game
+// BUTTON start game
 start_btn.onclick = () => {
   myGameArea.start()
+  myGameArea.clear()
   myGameArea.intervalStart();
   obstacle.createObstacle();
 }
-
 
 // update canvas 
 const update = () => {
@@ -74,6 +76,7 @@ const update = () => {
   updateBullet()
   p1.bulletHitSth(obstacle, p2)
   p2.bulletHitSth(obstacle, p1)
+  console.log(myGameArea.interval)
 }
 
 // create bullet 
