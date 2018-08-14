@@ -1,3 +1,12 @@
+const img_funny = new Image()
+img_funny.src = './image/Funny.svg'
+const img_sad = new Image()
+img_sad.src = './image/Sad.svg'
+const img_angry = new Image()
+img_angry.src = './image/Angry.svg'
+const img = new Image()
+
+
 class Player {
   constructor(x=0, y=250, width=25, height=25, color='orange') {
     this.x = x;
@@ -8,6 +17,7 @@ class Player {
     this.speedX = 0;
     this.speedY = 0;
     this.bullet_arr = [];
+    this.health = 3;
     this.isDead = false;
   }
   createPlayer(ctx) {
@@ -20,8 +30,14 @@ class Player {
     this.y += this.speedY;
     this.speedX = 0;
     this.speedY = 0;
-    ctx.fillStyle = color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    switch(this.health) {
+      case 3: img.src = img_funny.src; break;
+      case 2: img.src = img_sad.src; break;
+      case 1: img.src = img_angry.src; break;
+    }
+    
+    ctx.drawImage(img, this.x, this.y, this.width, this.height);
+    
   }
   
   moveUp() {
@@ -46,6 +62,7 @@ class Player {
     this.speedX = 0;
     this.speedY = 0;
     this.bullet_arr = [];
+    this.health = 3;
     this.isDead = false;
   }
 
@@ -65,13 +82,27 @@ class Player {
       }
       // hit player
       if (b.shootSth(player)) {
-        ctx.fillStyle = 'red'
-        ctx.font = "30px Arial";
-        ctx.fillText("↓You dead!!", player.x, player.y);
-        player.isDead = true;
-        myGameArea.reborn()
+        // clear the bullet in the same row
+        console.log('shoooooot you')
+        const newArr = this.bullet_arr.filter(bullet => bullet.y !== b.y)
+        // this.bullet_arr.splice(b_index, 1)
+        this.bullet_arr = [...newArr];
+        
+
+        player.health --;
+        this.checkHealth(player)
       } 
     })
+  }
+
+  checkHealth(player) {
+    console.log(player.health)
+    if (player.health === 0) {
+      ctx.fillStyle = 'red'
+      ctx.font = "30px Arial";
+      ctx.fillText("↓You dead!!", player.x, player.y);
+      myGameArea.reborn()
+    }
   }
   
 }
