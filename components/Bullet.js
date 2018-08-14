@@ -1,11 +1,7 @@
-class Bullet {
+class Bullet extends Component{
   constructor(x, y, width = 10, height = 3, speedX = 5, color='#f00') {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+    super(x, y, width, height)
     this.speedX = speedX;
-    // this.speedY = speedY;
     this.color = color;
   }
 

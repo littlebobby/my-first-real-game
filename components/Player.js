@@ -7,12 +7,9 @@ img_angry.src = './image/Angry.svg'
 const img = new Image()
 
 
-class Player {
+class Player extends Component{
   constructor(x=0, y=250, width=25, height=25, color='orange') {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+    super(x, y, width, height);
     this.color = color;
     this.speedX = 0;
     this.speedY = 0;
