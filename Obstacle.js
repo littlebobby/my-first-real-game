@@ -13,7 +13,6 @@ class Obstacle {
 
   createRect(x, y) {
     this.obs_arr.push({x: x, y: y, height: 25, width: 25})
-
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(x, y, 25, 25);
     this.ctx.fillStyle = 'green';

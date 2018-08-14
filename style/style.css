@@ -1,0 +1,84 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  background: #eee;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 50px;
+  border-radius: 40px;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 20px;
+  outline: none;
+  cursor: pointer;
+  transition-property: all;
+  transition: 0.4s;
+  letter-spacing: 2px;
+  line-height: 20px;
+}
+
+.btn-start {
+  flex: 0 1 25%;
+  background: green;
+}
+.btn-start:hover {
+  background: white;
+  color: green;
+}
+
+.btn-pause {
+  flex: 0 1 25%;
+  background: red;
+}
+.btn-pause:hover {
+  background: white;
+  color: red;
+}
+
+.btn-restart {
+  flex: 0 1 25%;
+  background: blue;
+}
+.btn-restart:hover {
+  background: white;
+  color: blue;
+}
+
+.btn-revive {
+  flex: 0 1 35%;
+  background: #dd20dd;
+  display: none;
+  animation-name: revive;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  margin: 20px 0 0 0;
+  transform: scale(1.2);
+}
+.btn-revive:hover {
+  background: white;
+  color: #dd20dd;
+}
+@keyframes revive {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 3px #dd20dd;
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 30px #dd20dd;
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 3px #dd20dd;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

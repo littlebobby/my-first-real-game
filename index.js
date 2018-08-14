@@ -1,28 +1,42 @@
 const canvas = document.querySelector('canvas');
-const startGame = document.querySelector('#btn-start');
-const stopGame = document.querySelector('#btn-stop');
+const start_btn = document.querySelector('#btn-start');
+const pause_btn = document.querySelector('#btn-pause');
 const ctx = canvas.getContext('2d');
-const restartGame = document.querySelector('#btn-restart');
+const revivePlayer = document.querySelector('#btn-revive');
+const restart_btn = document.querySelector('#btn-restart')
 
 const p1 = new Player()
 const p2 = new Player(775, 250, 25, 25, 'blue')
 const obstacle = new Obstacle(ctx)
 
-// stop game
-stopGame.onclick = () => {
-  myGameArea.clear();
+// BUTTON pause game
+pause_btn.onclick = () => {
+  pause_btn.innerHTML === 'Pause' 
+  ? (pause_btn.innerHTML = 'Resume', myGameArea.clear())
+  : (pause_btn.innerHTML = 'Pause', myGameArea.intervalStart());
 }
-
-restartGame.onclick = () => {
+// BUTTON revive game
+revivePlayer.onclick = () => {
   ctx.clearRect(0, 0, 800, 500)
   myGameArea.clear();
+  myGameArea.reborn();
   myGameArea.start();
+  myGameArea.intervalStart();
+}
+// BUTTON restart game -- new game
+restart_btn.onclick = () => {
+  ctx.clearRect(0, 0, 800, 500);
+  myGameArea.clear();
+  myGameArea.start();
+  p1.default();
+  p2.default(775, 250, 25, 25, 'blue');
+  obstacle.obs_arr = [];
+  obstacle.createObstacle();
   myGameArea.intervalStart();
 }
 
 const myGameArea = {
   start() {
-    
     p1.createPlayer(ctx);
     p2.createPlayer(ctx);
   },
@@ -31,21 +45,24 @@ const myGameArea = {
   },
   clear() {
     clearInterval(this.interval);
+  },
+  reborn() {
     if (p1.isDead) {
-      restartGame.innerHTML = 'player1 REVIVE';
+      revivePlayer.innerHTML = 'player1 REBORN';
     } else {
-      restartGame.innerHTML = 'player2 REVIVE';
+      revivePlayer.innerHTML = 'player2 REBORN';
     }
-    restartGame.style['display'] = 'block';
+    revivePlayer.style['display'] = 'block';
   }
 }
 
 // start game
-startGame.onclick = () => {
+start_btn.onclick = () => {
   myGameArea.start()
   myGameArea.intervalStart();
   obstacle.createObstacle();
 }
+
 
 // update canvas 
 const update = () => {
@@ -102,8 +119,3 @@ const keyPressed = () => {
   if (keys[39]) { p2.moveRight() }
   if (keys[80]) { createBullet(p2.x, p2.y + p2.height/2 + 0.5, false) }
 }
-
-
-
-
-

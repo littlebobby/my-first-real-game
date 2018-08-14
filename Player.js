@@ -37,6 +37,18 @@ class Player {
     if(this.x > 0) { this.speedX = -25; }  
   }
 
+  default(x=0, y=250, width=25, height=25, color='orange') {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.color = color;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.bullet_arr = [];
+    this.isDead = false;
+  }
+
   // bullet hit obstacle or the other player
   bulletHitSth(obstacle, player) {
     this.bullet_arr.forEach((b, b_index) => {
