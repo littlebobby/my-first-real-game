@@ -1,4 +1,6 @@
 const canvas = document.querySelector('canvas');
+const c_width = canvas.width;
+const c_height = canvas.height;
 const start_btn = document.querySelector('#btn-start');
 const pause_btn = document.querySelector('#btn-pause');
 const ctx = canvas.getContext('2d');
@@ -6,8 +8,9 @@ const revivePlayer = document.querySelector('#btn-revive');
 const restart_btn = document.querySelector('#btn-restart')
 
 const p1 = new Player()
-const p2 = new Player(775, 250, 25, 25, 'blue')
+const p2 = new Player(c_width - 25, c_height/2, 25, 25, 'blue')
 const obstacle = new Obstacle(ctx)
+let frame = 0;
 
 // BUTTON pause game
 pause_btn.onclick = () => {
@@ -17,7 +20,7 @@ pause_btn.onclick = () => {
 }
 // BUTTON revive game
 revivePlayer.onclick = () => {
-  ctx.clearRect(0, 0, 800, 500)
+  ctx.clearRect(0, 0, c_width, c_height)
   myGameArea.clear();
   myGameArea.reborn();
   myGameArea.start();
@@ -25,11 +28,11 @@ revivePlayer.onclick = () => {
 }
 // BUTTON restart game -- new game
 restart_btn.onclick = () => {
-  ctx.clearRect(0, 0, 800, 500);
+  ctx.clearRect(0, 0, c_width, c_height);
   myGameArea.clear();
   myGameArea.start();
   p1.default();
-  p2.default(775, 250, 25, 25, 'blue');
+  p2.default(c_width - 25, c_height/2, 25, 25, 'blue');
   obstacle.obs_arr = [];
   obstacle.createObstacle();
   myGameArea.intervalStart();
@@ -64,11 +67,13 @@ start_btn.onclick = () => {
   myGameArea.clear()
   myGameArea.intervalStart();
   obstacle.createObstacle();
+  obstacle.createRiver()
 }
 
 // update canvas 
 const update = () => {
-  ctx.clearRect(0, 0, 800, 500)
+  frame ++;
+  ctx.clearRect(0, 0, c_width, c_height)
   p1.updatePlayer(ctx, 'orange');
   p2.updatePlayer(ctx, 'blue');
   
@@ -76,7 +81,10 @@ const update = () => {
   updateBullet()
   p1.bulletHitSth(obstacle, p2)
   p2.bulletHitSth(obstacle, p1)
-  console.log(myGameArea.interval)
+  if (frame % 3 === 0) {
+    obstacle.generateRandomObstacle()
+  }
+  
 }
 
 // create bullet 

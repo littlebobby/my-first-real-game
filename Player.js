@@ -31,10 +31,10 @@ class Player {
     if(this.y < 475) { this.speedY = 25; }
   }
   moveRight() {
-    if(this.x < 775) { this.speedX = 25; }
+    if(this.x < 775 && this.x !== 350) { this.speedX = 25; }
   }
   moveLeft() {
-    if(this.x > 0) { this.speedX = -25; }  
+    if(this.x > 0 && this.x !== 425) { this.speedX = -25; }  
   }
 
   default(x=0, y=250, width=25, height=25, color='orange') {
@@ -62,7 +62,6 @@ class Player {
       // hit border
       if (b.x + b.width > 800 || b.x < 0 || b.y < 0 || b.y + b.height > 500) {
         this.bullet_arr.splice(b_index, 1);
-        console.log('hit border')
       }
       // hit player
       if (b.shootSth(player)) {

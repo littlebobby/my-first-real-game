@@ -5,10 +5,14 @@ $revive: rgb(221, 32, 221);
 
 body {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 2rem;
+  font-size: 1.5rem;
   background: #eee;
 }
 
+canvas {
+  display: block;
+  margin: 0 auto;
+}
 .container {
   display: flex;
   justify-content: space-around;
