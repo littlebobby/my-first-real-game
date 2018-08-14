@@ -81,7 +81,7 @@ const update = () => {
   updateBullet()
   p1.bulletHitSth(obstacle, p2)
   p2.bulletHitSth(obstacle, p1)
-  if (frame % 3 === 0) {
+  if (frame % 6 === 0) {
     obstacle.generateRandomObstacle()
   }
   

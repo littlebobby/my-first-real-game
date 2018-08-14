@@ -88,7 +88,7 @@ class Player {
         // this.bullet_arr.splice(b_index, 1)
         this.bullet_arr = [...newArr];
         
-
+        console.log(this.health)
         player.health --;
         this.checkHealth(player)
       } 
@@ -99,7 +99,7 @@ class Player {
     console.log(player.health)
     if (player.health === 0) {
       ctx.fillStyle = 'red'
-      ctx.font = "30px Arial";
+      ctx.font = "bold 30px Courier New";
       ctx.fillText("↓You dead!!", player.x, player.y);
       myGameArea.reborn()
     }

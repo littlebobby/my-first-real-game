@@ -1,7 +1,8 @@
 body {
   font-family: "Courier New", Courier, monospace;
+  font-weight: 400;
   font-size: 1.5rem;
-  background: #eee;
+  background: #f1f1f1;
 }
 
 h1, p {
@@ -11,6 +12,7 @@ h1, p {
 canvas {
   display: block;
   margin: 0 auto;
+  border: 4px black solid;
 }
 
 .container {
@@ -19,28 +21,27 @@ canvas {
   flex-wrap: wrap;
 }
 
-.btn {
-  padding: 10px 50px;
-  border-radius: 40px;
-  color: white;
+.btn-revive, .btn-restart, .btn-pause, .btn-start {
   font-family: "Courier New", Courier, monospace;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 1.1rem;
+  padding: 10px 50px;
+  border-radius: 40px;
+  color: #f1f1f1;
   outline: none;
   cursor: pointer;
   transition-property: all;
   transition: 0.4s;
   letter-spacing: 2px;
-  line-height: 20px;
+  line-height: 1.1rem;
 }
 
 .btn-start {
   flex: 0 1 25%;
-  background: green;
+  background: #05e223;
 }
 .btn-start:hover {
-  background: white;
-  color: green;
+  background: #039717;
 }
 
 .btn-pause {
@@ -48,8 +49,7 @@ canvas {
   background: red;
 }
 .btn-pause:hover {
-  background: white;
-  color: red;
+  background: #b30000;
 }
 
 .btn-restart {
@@ -57,23 +57,19 @@ canvas {
   background: blue;
 }
 .btn-restart:hover {
-  background: white;
-  color: blue;
+  background: #0000b3;
 }
 
 .btn-revive {
   flex: 0 1 35%;
   background: #dd20dd;
   display: none;
-  animation-name: revive;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
+  animation: revive 1s infinite;
   margin: 20px 0 0 0;
   transform: scale(1.2);
 }
 .btn-revive:hover {
-  background: white;
-  color: #dd20dd;
+  background: #9a169a;
 }
 @keyframes revive {
   0% {
