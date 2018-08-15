@@ -13,6 +13,7 @@ class Player extends Component{
     this.bullet_arr = [];
     this.health = 3;
     this.isDead = false;
+    this.hasDizziness = false;
   }
   createPlayer(ctx) {
     ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
@@ -30,18 +31,20 @@ class Player extends Component{
     }
     ctx.drawImage(img, this.x, this.y, this.width, this.height);
   }
+
+
   
   moveUp() {
-    if(this.y > 0) { this.speedY = -25; }
+    if(this.y > 0 && !this.hasDizziness) { this.speedY = -25; }
   }
   moveDown() {
-    if(this.y < 475) { this.speedY = 25; }
+    if(this.y < 575 && !this.hasDizziness) { this.speedY = 25; }
   }
   moveRight() {
-    if(this.x < 775 && this.x !== 350) { this.speedX = 25; }
+    if(this.x < 975 && this.x !== 450 && !this.hasDizziness) { this.speedX = 25; }
   }
   moveLeft() {
-    if(this.x > 0 && this.x !== 425) { this.speedX = -25; }  
+    if(this.x > 0 && this.x !== 525 && !this.hasDizziness) { this.speedX = -25; }  
   }
 
   default(x=0, y=250, width=25, height=25) {
@@ -58,7 +61,7 @@ class Player extends Component{
   }
 
   // bullet hit obstacle or the other player
-  bulletHitSth(obstacle, player) {
+  bulletHitSth(obstacle, player, artillery) {
     this.bullet_arr.forEach((b, b_index) => {
       // hit obstacle 
       obstacle.obs_arr.forEach((o, o_index) => {
@@ -68,20 +71,30 @@ class Player extends Component{
         } 
       })
       // hit border
-      if (b.x + b.width > 800 || b.x < 0 || b.y < 0 || b.y + b.height > 500) {
+      if (b.x + b.width > 1000 || b.x < 0 || b.y < 0 || b.y + b.height > 600) {
         this.bullet_arr.splice(b_index, 1);
       }
       // hit player
       if (b.shootSth(player)) {
         // clear the bullet in the same row
-        console.log('shoooooot you')
+        // console.log('shoooooot you')
         const newArr = this.bullet_arr.filter(bullet => bullet.y !== b.y)
         // this.bullet_arr.splice(b_index, 1)
         this.bullet_arr = [...newArr];
-        console.log(this.health)
+        // console.log(this.health)
         player.health --;
+
+        // set dizziness effect 
+        // player.hasDizziness = true;
+        // setTimeout(()=>player.hasDizziness = false, 3000)
         this.checkHealth(player)
       } 
+
+      // bulllet shoot artillery
+      if (b.shootSth(artillery)) {
+        console.log('shoot artillery');
+        this.bullet_arr.splice(b_index, 1);
+      }
     })
   }
 

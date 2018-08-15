@@ -6,6 +6,7 @@ $bg-color: #f1f1f1;
 $main-font: 'Courier New', Courier, monospace;
 $main-text-size: 1.1rem;
 
+
 @mixin font($family, $weight, $size) {
   font-family: $family;
   font-weight: $weight;

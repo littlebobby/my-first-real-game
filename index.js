@@ -10,6 +10,7 @@ const restart_btn = document.querySelector('#btn-restart')
 const p1 = new Player()
 const p2 = new Player(c_width - 25, c_height/2)
 const obstacle = new Obstacle(ctx)
+const artillery = new Artillery();
 let frame = 0;
 
 // BUTTON pause game
@@ -67,7 +68,11 @@ start_btn.onclick = () => {
   myGameArea.clear()
   myGameArea.intervalStart();
   obstacle.createObstacle();
-  obstacle.createRiver()
+  obstacle.createRiver();
+  artillery.createArtillery(ctx)
+
+
+  // obstacle.createArtillery();
 }
 
 // update canvas 
@@ -78,12 +83,19 @@ const update = () => {
   p2.updatePlayer(ctx, 'blue');
   
   obstacle.updateObstacle()
+  artillery.createArtillery(ctx)
   updateBullet()
-  p1.bulletHitSth(obstacle, p2)
-  p2.bulletHitSth(obstacle, p1)
+  p1.bulletHitSth(obstacle, p2, artillery)
+  p2.bulletHitSth(obstacle, p1, artillery)
   if (frame % 6 === 0) {
     obstacle.generateRandomObstacle()
   }
+  if (frame % 100 === 0) {
+      createMissile()
+      console.log(artillery.missle_arr)
+  }
+
+  updateMissle()
   
 }
 
@@ -101,6 +113,36 @@ const createBullet = (x, y, isP1 = true) => {
 const updateBullet = () => {
   p1.bullet_arr.forEach(i => i.updateBullet())
   p2.bullet_arr.forEach(i => i.updateBullet())
+}
+
+const createMissile = () => {
+  // const located_x = Math.floor((Math.random()*40)) *25
+  // const located_y = Math.floor((Math.random()*24)) * 25
+
+  // right now inital position 0
+  const missle = new Missle(500, 275, 25, 25, 0, 0);
+  // console.log('create missle in index.js called')
+  artillery.missle_arr.push(missle) 
+  artillery.missle_arr[0].drawMissle(ctx);
+}
+const updateMissleTargetLocation = () => {
+  artillery.missle_arr[0].located_x = p1.x;
+  artillery.missle_arr[0].located_y = p1.y;
+
+}
+const updateMissle = () => {
+  // artillery.missle_arr.forEach(i => i.updateMissle(ctx))
+  if (artillery.missle_arr.length) {
+    updateMissleTargetLocation()
+    artillery.missle_arr[0].updateMissle(ctx)
+    // artillery.missle_arr[0].flyToLocatedPosition()
+    // console.log(artillery.missle_arr[0]);
+    
+    // console.log('distance_x', artillery.missle_arr[0].located_x - artillery.missle_arr[0].x);
+    // console.log('distance_y', artillery.missle_arr[0].located_y - artillery.missle_arr[0].y);
+  }
+  
+
 }
 
 

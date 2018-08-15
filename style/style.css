@@ -64,7 +64,7 @@ canvas {
   flex: 0 1 35%;
   background: #dd20dd;
   display: none;
-  animation: revive 1s infinite;
+  animation-name: revive 1s infinite;
   margin: 20px 0 0 0;
   transform: scale(1.2);
 }
