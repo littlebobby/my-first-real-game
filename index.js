@@ -77,6 +77,8 @@ start_btn.onclick = () => {
 
 // update canvas 
 const update = () => {
+  // console.log('100 update')
+
   frame ++;
   ctx.clearRect(0, 0, c_width, c_height)
   p1.updatePlayer(ctx, 'orange');
@@ -85,14 +87,24 @@ const update = () => {
   obstacle.updateObstacle()
   artillery.createArtillery(ctx)
   updateBullet()
+  // check bullet 
   p1.bulletHitSth(obstacle, p2, artillery)
   p2.bulletHitSth(obstacle, p1, artillery)
+
+  // check missle
+  if (artillery.missle_arr.length) {
+    // need to add player 2
+    // console.log(artillery.missle_arr)
+    // console.log(frame)
+    p1.missleBoommed(artillery); // note!!!!!!!
+
+  }
   if (frame % 6 === 0) {
     obstacle.generateRandomObstacle()
   }
   if (frame % 100 === 0) {
       createMissile()
-      console.log(artillery.missle_arr)
+      // console.log(artillery.missle_arr)
   }
 
   updateMissle()
@@ -123,18 +135,29 @@ const createMissile = () => {
   const missle = new Missle(500, 275, 25, 25, 0, 0);
   // console.log('create missle in index.js called')
   artillery.missle_arr.push(missle) 
-  artillery.missle_arr[0].drawMissle(ctx);
+  missle.drawMissle(ctx);
 }
 const updateMissleTargetLocation = () => {
-  artillery.missle_arr[0].located_x = p1.x;
-  artillery.missle_arr[0].located_y = p1.y;
+  artillery.missle_arr.map(i => {
+    i.located_x = p1.x;
+    i.located_y = p1.y;
+  })
+  // artillery.missle_arr = [...newArr];
+  // artillery.missle_arr[0].located_x = p1.x;
+  // artillery.missle_arr[0].located_y = p1.y;
 
 }
 const updateMissle = () => {
-  // artillery.missle_arr.forEach(i => i.updateMissle(ctx))
   if (artillery.missle_arr.length) {
-    updateMissleTargetLocation()
-    artillery.missle_arr[0].updateMissle(ctx)
+    artillery.missle_arr.map(i => i.updateMissle(ctx))
+
+    // update mussle target location 3 frames per time
+    if (frame % 3 === 0) {
+      // console.log('100 updatemissle')
+      updateMissleTargetLocation()
+    }
+    
+    // artillery.missle_arr[0].updateMissle(ctx)
     // artillery.missle_arr[0].flyToLocatedPosition()
     // console.log(artillery.missle_arr[0]);
     

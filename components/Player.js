@@ -7,6 +7,17 @@ img_angry.src = './image/Angry.svg'
 const img = new Image()
 
 
+const img_sleep_left = new Image();
+img_sleep_left.src = './image/sleep.png';
+
+const img_sleep = new Image();
+img_sleep_right.src = './image/sleep_right.png';
+
+
+// const img_laugh = new Image();
+// img_laugh.src = './image/laugh_emoji.png'
+
+
 class Player extends Component{
   constructor(x=0, y=250, width=25, height=25,speedX = 0, speedY=0) {
     super(x, y, width, height, speedX, speedY);
@@ -29,6 +40,9 @@ class Player extends Component{
       case 2: img.src = img_sad.src; break;
       case 1: img.src = img_angry.src; break;
     }
+    if (this.hasDizziness) {
+      img.src = img_sleep_left.src;
+    } 
     ctx.drawImage(img, this.x, this.y, this.width, this.height);
   }
 
@@ -83,16 +97,12 @@ class Player extends Component{
         this.bullet_arr = [...newArr];
         // console.log(this.health)
         player.health --;
-
-        // set dizziness effect 
-        // player.hasDizziness = true;
-        // setTimeout(()=>player.hasDizziness = false, 3000)
         this.checkHealth(player)
       } 
 
       // bulllet shoot artillery
       if (b.shootSth(artillery)) {
-        console.log('shoot artillery');
+        // console.log('shoot artillery');
         this.bullet_arr.splice(b_index, 1);
       }
     })
@@ -106,6 +116,25 @@ class Player extends Component{
       ctx.fillText("↓You dead!!", player.x, player.y);
       myGameArea.reborn()
     }
+  }
+
+  missleBoommed(artillery) {
+    // console.log(artillery.missle_arr);
+    // console.log(this)
+    artillery.missle_arr.map((a, i) => {
+      // console.log(a)
+      if (a.inMissleShouldBoomArea(this)) {
+        // set dizziness effect 
+        this.hasDizziness = true;
+        console.log('before', artillery.missle_arr)
+        setTimeout(()=>this.hasDizziness = false, 3000)
+        artillery.missle_arr.splice(i, 1)
+        console.log('after', artillery.missle_arr)
+        console.warn('i catch you ')
+        // console.log(this.hasDizziness)
+      }
+    }) 
+
   }
   
 }
