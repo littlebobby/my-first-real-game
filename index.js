@@ -8,7 +8,7 @@ const revivePlayer = document.querySelector('#btn-revive');
 const restart_btn = document.querySelector('#btn-restart')
 
 const p1 = new Player()
-const p2 = new Player(c_width - 25, c_height/2, 25, 25, 'blue')
+const p2 = new Player(c_width - 25, c_height/2)
 const obstacle = new Obstacle(ctx)
 let frame = 0;
 
@@ -32,7 +32,7 @@ restart_btn.onclick = () => {
   myGameArea.clear();
   myGameArea.start();
   p1.default();
-  p2.default(c_width - 25, c_height/2, 25, 25, 'blue');
+  p2.default(c_width - 25, c_height/2);
   obstacle.obs_arr = [];
   obstacle.createObstacle();
   myGameArea.intervalStart();
@@ -90,14 +90,11 @@ const update = () => {
 // create bullet 
 const createBullet = (x, y, isP1 = true) => {
   if (isP1) {
-    const bullet = new Bullet(x, y, 10, 3, 5, 'orange');
-    p1.bullet_arr.push(bullet)
-    // bullet.drawBullet();
-    
+    const bullet = new Bullet(x, y, 10, 3, 5, 0, 'orange');
+    p1.bullet_arr.push(bullet)    
   } else {
-    const bullet = new Bullet(x, y, 10, 3, -5, 'blue');
+    const bullet = new Bullet(x, y, 10, 3, -5, 0, 'blue');
     p2.bullet_arr.push(bullet)
-    // bullet.drawBullet();
   } 
 }
 

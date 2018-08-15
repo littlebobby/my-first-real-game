@@ -8,18 +8,14 @@ const img = new Image()
 
 
 class Player extends Component{
-  constructor(x=0, y=250, width=25, height=25, color='orange') {
-    super(x, y, width, height);
-    this.color = color;
-    this.speedX = 0;
-    this.speedY = 0;
+  constructor(x=0, y=250, width=25, height=25,speedX = 0, speedY=0) {
+    super(x, y, width, height, speedX, speedY);
     this.bullet_arr = [];
     this.health = 3;
     this.isDead = false;
   }
   createPlayer(ctx) {
-    ctx.fillStyle = this.color
-    ctx.fillRect(this.x, this.y, this.width, this.height)
+    ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
   }
 
   updatePlayer(ctx, color='black') {
@@ -32,9 +28,7 @@ class Player extends Component{
       case 2: img.src = img_sad.src; break;
       case 1: img.src = img_angry.src; break;
     }
-    
     ctx.drawImage(img, this.x, this.y, this.width, this.height);
-    
   }
   
   moveUp() {
@@ -50,7 +44,7 @@ class Player extends Component{
     if(this.x > 0 && this.x !== 425) { this.speedX = -25; }  
   }
 
-  default(x=0, y=250, width=25, height=25, color='orange') {
+  default(x=0, y=250, width=25, height=25) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -84,7 +78,6 @@ class Player extends Component{
         const newArr = this.bullet_arr.filter(bullet => bullet.y !== b.y)
         // this.bullet_arr.splice(b_index, 1)
         this.bullet_arr = [...newArr];
-        
         console.log(this.health)
         player.health --;
         this.checkHealth(player)

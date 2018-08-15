@@ -1,7 +1,6 @@
 class Bullet extends Component{
-  constructor(x, y, width = 10, height = 3, speedX = 5, color='#f00') {
-    super(x, y, width, height)
-    this.speedX = speedX;
+  constructor(x, y, width = 10, height = 3, speedX = 5, speedY=0, color='#f00') {
+    super(x, y, width, height, speedX, speedY);
     this.color = color;
   }
 
@@ -10,9 +9,9 @@ class Bullet extends Component{
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
   updateBullet() {
-    ctx.fillStyle = this.color;
     this.x += this.speedX;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.y += this.speedY;
+    this.drawBullet()
   }
 
   top() { return this.y }
