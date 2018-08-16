@@ -56,7 +56,7 @@ class Player extends Component{
     if(this.y < 575 && !this.hasDizziness) { this.speedY = 25; }
   }
   moveRight() {
-    if(this.x < 975 && this.x !== 450 && !this.hasDizziness) { this.speedX = 25; }
+    if(this.x < 975 && this.x !== 475 && !this.hasDizziness) { this.speedX = 25; }
   }
   moveLeft() {
     if(this.x > 0 && this.x !== 525 && !this.hasDizziness) { this.speedX = -25; }  
@@ -139,9 +139,10 @@ class Player extends Component{
         this.y = holeObj.arr[1].y
         this.transferable = false; 
         this.isTransferable()
-        console.log(holeObj.health)
+        // console.log(holeObj.health)
         holeObj.health --
         console.log(holeObj.health)
+        holeObj.checkIfHoleDie()
 
 
       } else if (holeObj.arr[1].isPlayerEntered(this)) {
@@ -150,6 +151,7 @@ class Player extends Component{
         this.transferable = false; 
         this.isTransferable();
         holeObj.health --
+        holeObj.checkIfHoleDie()
       }
     }
   }
