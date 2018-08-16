@@ -130,7 +130,6 @@ class Player extends Component{
         artillery.missle_arr.splice(i, 1)
         console.log('after', artillery.missle_arr)
         console.warn('i catch you ')
-        // console.log(this.hasDizziness)
       }
     }) 
 
