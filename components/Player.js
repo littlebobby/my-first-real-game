@@ -135,5 +135,18 @@ class Player extends Component{
     }) 
 
   }
+
+  enteredIntoBlackHole(holeArr) {
+    if (holeArr.length === 2) {
+      holeArr.forEach((a, i) => {
+        if (a.isPlayerEntered(this)) {
+          console.log('has entered one hole', i)
+        }
+
+      }
+      )
+      // console.log('has two length')
+    }
+  }
   
 }
