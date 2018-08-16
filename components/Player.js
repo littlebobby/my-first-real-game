@@ -102,7 +102,6 @@ class Player extends Component{
 
       // bulllet shoot artillery
       if (b.shootSth(artillery)) {
-        // console.log('shoot artillery');
         this.bullet_arr.splice(b_index, 1);
       }
     })
