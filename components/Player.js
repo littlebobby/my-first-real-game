@@ -100,6 +100,8 @@ class Player extends Component{
         this.checkHealth(player)
       } 
 
+
+      
       // bulllet shoot artillery
       if (b.shootSth(artillery)) {
         this.bullet_arr.splice(b_index, 1);
