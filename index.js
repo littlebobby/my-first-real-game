@@ -12,6 +12,7 @@ const p2 = new Player(c_width - 25, c_height/2)
 const obstacle = new Obstacle(ctx)
 const artillery = new Artillery();
 let frame = 0;
+// black hole array
 
 // BUTTON pause game
 pause_btn.onclick = () => {
@@ -71,6 +72,8 @@ start_btn.onclick = () => {
   obstacle.createRiver();
   artillery.createArtillery(ctx)
 
+  // generate black hole
+  createPairBlackHole()
 
   // obstacle.createArtillery();
 }
@@ -111,6 +114,9 @@ const update = () => {
   }
 
   updateMissle()
+
+  //update black hole
+  updateBlackHole()
   
 }
 
@@ -183,6 +189,21 @@ const updateMissle = () => {
   }
   
 
+}
+const createPairBlackHole = () => {
+  generateBlackHole()
+  generateBlackHole()
+}
+const generateBlackHole = () => {
+  const blackHole = new BlackHole()
+  // generate blackhole at random location 
+  blackHole.generateRandomLocation(ctx)
+  // blackHole.createPairBlackHole(ctx)
+  hole_arr_left.push(blackHole);
+  console.log('black hole generated', hole_arr_left)
+}
+const updateBlackHole = () => {
+  hole_arr_left.forEach(i => i.redrawBlackHole(ctx))
 }
 
 
