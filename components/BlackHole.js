@@ -1,29 +1,47 @@
-const hole_arr_left = [];
-const hole_arr_right = [];
-
+const hole_left = {
+  arr: [],
+  health: 3,
+  drawHolePermit: false,
+  player: 'p1'
+}
+const hole_right = {
+  arr: [],
+  health: 3,
+  drawHolePermit: false,
+  player: 'p2'
+}
 const img_black_hole = new Image();
-img_black_hole.src = './image/black_hole.svg'
+img_black_hole.src = './image/black-hole-1.svg';
+const img_black_hole_1 = new Image();
+img_black_hole_1.src = './image/black-hole-1.svg'
+const img_black_hole_2 = new Image();
+img_black_hole_2.src = './image/black-hole-2.svg'
+const img_black_hole_3 = new Image();
+img_black_hole_3.src = './image/black-hole-3.svg'
 
 class BlackHole extends Component {
   constructor(x=0, y=250, width=25, height=25,speedX = 0, speedY=0) {
     super(x, y, width, height, speedX, speedY);
     
   }
-
-  // control two sides
-  // drawPair(ctx) {
-  //   if (hole_arr_left.length < 2) {
-  //     this.generateRandomLocation_left(ctx)
-  //   } else if (hole_arr_right.length < 2) {
-  //     this.generateRandomLocation_right(ctx)
-  //   } else {
-  //     return
-  //   }
-  //   console.log('left side black hole', hole_arr_left)
-  //   console.log('RIGHT side black hole', hole_arr_right)
-  // }
-
   // left
+  canDrawHole(holeObj, ctx) {
+    if (holeObj.health === 0) {
+      holeObj.arr = [];
+      holeObj.drawHolePermit = false;
+    }
+    console.log(holeObj.drawHolePermit)
+    if (holeObj.drawHolePermit) {
+      if (holeObj.player === 'p1') {
+        this.generateRandomLocation_left(ctx)
+        holeObj.drawHolePermit = false
+      } else if (holeObj.player === 'p2') {
+        this.generateRandomLocation_right(ctx)
+        holeObj.drawHolePermit = false
+      }
+    }
+  }
+
   generateRandomLocation_left(ctx) {
     const randomY = Math.floor(Math.random()*(24)) * 25
     const columnArr = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
@@ -46,8 +64,16 @@ class BlackHole extends Component {
   }
 
 
-  redrawBlackHole(ctx) {
+  redrawBlackHole(ctx, holeObj) {
     ctx.clearRect(this.x, this.y, 25, 25)
+    switch(holeObj.health) {
+      case 3: img_black_hole.src = img_black_hole_1.src; break;
+      case 2: img_black_hole.src = img_black_hole_2.src; break;
+      case 1: img_black_hole.src = img_black_hole_3.src; break;
+    }
+    // console.log('health', holeObj.health)
+    // console.log(img_black_hole.src)
+  
     ctx.drawImage(img_black_hole, this.x, this.y, this.width, this.height);
   }
   

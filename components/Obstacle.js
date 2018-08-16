@@ -4,16 +4,16 @@ class Obstacle {
     this.obs_arr = [];
   }
   createObstacle() {
-    for(let i = 6; i < 20; i ++) {
-      for (let j = 0; j < 24; j ++) {
-        this.createRect(i*25, j*25);
-      }
-    }
-    for(let i = 22; i < 35; i ++) {
-      for (let j = 0; j < 24; j ++) {
-        this.createRect(i*25, j*25);
-      }
-    }
+  //   for(let i = 6; i < 20; i ++) {
+  //     for (let j = 0; j < 24; j ++) {
+  //       this.createRect(i*25, j*25);
+  //     }
+  //   }
+  //   for(let i = 22; i < 35; i ++) {
+  //     for (let j = 0; j < 24; j ++) {
+  //       this.createRect(i*25, j*25);
+  //     }
+  //   }
   }
   createRiver() {
     for(let i = 20; i < 22; i ++) {

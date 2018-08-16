@@ -116,13 +116,13 @@ const update = () => {
   updateMissle()
 
   //update black hole
-  createPairBlackHole()
+  // createPairBlackHole()
   updateBlackHole()
 
 
   // enter blakc hole 
-  p1.enteredIntoBlackHole(hole_arr_left)
-  p2.enteredIntoBlackHole(hole_arr_right)
+  p1.enteredIntoBlackHole(hole_left)
+  p2.enteredIntoBlackHole(hole_right)
 
   
 }
@@ -200,31 +200,36 @@ const updateMissle = () => {
 const createPairBlackHole = () => {
   generateBlackHole()
   generateBlackHole()
-  // generateBlackHole()
-  // generateBlackHole()
+  generateBlackHole()
+  generateBlackHole()
 
 }
 const generateBlackHole = () => {
   const blackHole = new BlackHole()
+  blackHole.canDrawHole(hole_left, ctx)
+  blackHole.canDrawHole(hole_right, ctx)
+
   // generate blackhole at random location 
   // blackHole.generateRandomLocation(ctx)
-  if (hole_arr_left.length < 2) {
-    // blackHole.drawPair(ctx)
+  if (hole_left.arr.length < 2) {
     blackHole.generateRandomLocation_left(ctx)
-    hole_arr_left.push(blackHole);
+    // blackHole.canDrawHole(hole_left, ctx)
+    hole_left.arr.push(blackHole);
+    console.log('hiiiiiiii')
 
-  } else if (hole_arr_right.length < 2) {
-    // blackHole.drawPair(ctx)
+
+  } else if (hole_right.arr.length < 2) {
     blackHole.generateRandomLocation_right(ctx)
-
-    hole_arr_right.push(blackHole);
+    // blackHole.canDrawHole(hole_right, ctx)
+    console.log('hiiiiiiii')
+    hole_right.arr.push(blackHole);
   }
 
 }
 const updateBlackHole = () => {
-  hole_arr_left.forEach(i => i.redrawBlackHole(ctx))
+  hole_left.arr.forEach(i => i.redrawBlackHole(ctx, hole_left))
   // console.log('update black hole get called')
-  hole_arr_right.forEach(i => i.redrawBlackHole(ctx))
+  hole_right.arr.forEach(i => i.redrawBlackHole(ctx, hole_right))
 
     // console.log('left side black hole', hole_arr_left)
     // console.log('RIGHT side black hole', hole_arr_right)

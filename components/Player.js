@@ -25,6 +25,7 @@ class Player extends Component{
     this.health = 3;
     this.isDead = false;
     this.hasDizziness = false;
+    this.transferable = true;
   }
   createPlayer(ctx) {
     ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
@@ -91,16 +92,12 @@ class Player extends Component{
       // hit player
       if (b.shootSth(player)) {
         // clear the bullet in the same row
-        // console.log('shoooooot you')
         const newArr = this.bullet_arr.filter(bullet => bullet.y !== b.y)
         // this.bullet_arr.splice(b_index, 1)
         this.bullet_arr = [...newArr];
-        // console.log(this.health)
         player.health --;
         this.checkHealth(player)
       } 
-
-
       
       // bulllet shoot artillery
       if (b.shootSth(artillery)) {
@@ -133,19 +130,35 @@ class Player extends Component{
         console.warn('i catch you ')
       }
     }) 
-
   }
 
-  enteredIntoBlackHole(holeArr) {
-    if (holeArr.length === 2) {
-      holeArr.forEach((a, i) => {
-        if (a.isPlayerEntered(this)) {
-          console.log('has entered one hole', i)
-        }
+  enteredIntoBlackHole(holeObj) {
+    if (holeObj.arr.length === 2 && this.transferable) {
+      if (holeObj.arr[0].isPlayerEntered(this)) {
+        this.x = holeObj.arr[1].x
+        this.y = holeObj.arr[1].y
+        this.transferable = false; 
+        this.isTransferable()
+        console.log(holeObj.health)
+        holeObj.health --
+        console.log(holeObj.health)
 
+
+      } else if (holeObj.arr[1].isPlayerEntered(this)) {
+        this.x = holeObj.arr[0].x
+        this.y = holeObj.arr[0].y
+        this.transferable = false; 
+        this.isTransferable();
+        holeObj.health --
       }
-      )
-      // console.log('has two length')
+    }
+  }
+
+  isTransferable() {
+    if (!this.transferable) {
+      setTimeout(() => {
+        this.transferable = true;
+      }, 3000);
     }
   }
   

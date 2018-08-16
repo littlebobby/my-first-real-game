@@ -19,14 +19,11 @@ class Missle extends Component{
     console.log('drawMissle called');
   }
   updateMissle(ctx) {
-    this.missleOnFlying()
-    this.x += this.speedX;
-    this.y += this.speedY;
-    // ctx.rotate(20*Math.PI/180)
-    // this.drawMissle(ctx)
-    ctx.drawImage(img_missle ,this.x, this.y, this.width, this.height);
+    // this.missleOnFlying()
+    // this.x += this.speedX;
+    // this.y += this.speedY;
+    // ctx.drawImage(img_missle ,this.x, this.y, this.width, this.height);
 
-    // this.missle_fly_upward()
   }
 
   top() { return this.y }
@@ -34,12 +31,6 @@ class Missle extends Component{
   left() {return this.x }
   right() {return this.x + this.width }
 
-  // shootSth(o) {
-  //   return (!(this.top() > o.y + o.height||
-  //             this.bottom() < o.y ||
-  //             this.left() > o.x + o.width ||
-  //             this.right() < o.x))
-  // }
   missleOnFlying() {
     if (this.flyUpward && this.y > -20) {
       this.missle_fly_upward() 
