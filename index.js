@@ -96,7 +96,10 @@ const update = () => {
     // need to add player 2
     // console.log(artillery.missle_arr)
     // console.log(frame)
+    
     p1.missleBoommed(artillery); // note!!!!!!!
+    p2.missleBoommed(artillery); // note!!!!!!!
+
 
   }
   if (frame % 6 === 0) {
@@ -132,15 +135,29 @@ const createMissile = () => {
   // const located_y = Math.floor((Math.random()*24)) * 25
 
   // right now inital position 0
-  const missle = new Missle(500, 275, 25, 25, 0, 0);
+  const random = Math.random() - 0.5;
+  const missle = new Missle(500, 275, 25, 25, 0, 0, true);
+  if (random > 0) {
+    missle.targetP1 = true;
+  } else {
+    missle.targetP1 = false;
+  }
+  // const missle = new Missle(500, 275, 25, 25, 0, 0, true);
   // console.log('create missle in index.js called')
   artillery.missle_arr.push(missle) 
   missle.drawMissle(ctx);
 }
 const updateMissleTargetLocation = () => {
   artillery.missle_arr.map(i => {
-    i.located_x = p1.x;
-    i.located_y = p1.y;
+    // const random = Math.random() - 1;
+    if (i.targetP1) {
+      i.located_x = p1.x;
+      i.located_y = p1.y;
+    } else {
+      i.located_x = p2.x;
+      i.located_y = p2.y;
+    }
+    
   })
   // artillery.missle_arr = [...newArr];
   // artillery.missle_arr[0].located_x = p1.x;

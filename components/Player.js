@@ -8,9 +8,9 @@ const img = new Image()
 
 
 const img_sleep_left = new Image();
-img_sleep_left.src = './image/sleep.png';
+img_sleep_left.src = './image/sleep_left.png';
 
-const img_sleep = new Image();
+const img_sleep_right = new Image();
 img_sleep_right.src = './image/sleep_right.png';
 
 
@@ -122,6 +122,7 @@ class Player extends Component{
     // console.log(artillery.missle_arr);
     // console.log(this)
     artillery.missle_arr.map((a, i) => {
+      // console.log(`${this} and ${artillery.missle_arr}`)
       // console.log(a)
       if (a.inMissleShouldBoomArea(this)) {
         // set dizziness effect 

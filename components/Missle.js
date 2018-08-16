@@ -6,7 +6,7 @@ console.log(img_missle)
 img_missle.style.color = 'blue'
 
 class Missle extends Component{
-  constructor(x = 0, y = 0, width, height, speedX = 0, speedY=0, located_x=0, located_y=0) {
+  constructor(x = 0, y = 0, width, height, speedX = 0, speedY=0, located_x=0, located_y=0, targetP1=true) {
     super(x, y, width, height, speedX, speedY);
     this.located_x = located_x;
     this.located_y = located_y;
