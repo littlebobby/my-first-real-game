@@ -119,11 +119,9 @@ class Player extends Component{
   }
 
   missleBoommed(artillery) {
-    // console.log(artillery.missle_arr);
-    // console.log(this)
+
     artillery.missle_arr.map((a, i) => {
-      // console.log(`${this} and ${artillery.missle_arr}`)
-      // console.log(a)
+
       if (a.inMissleShouldBoomArea(this)) {
         // set dizziness effect 
         this.hasDizziness = true;
