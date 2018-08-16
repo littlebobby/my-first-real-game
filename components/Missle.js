@@ -1,7 +1,6 @@
 const img_missle = new Image();
 img_missle.src = './image/missle.svg'
 // const changeMissleDeg = document.querySelector('#change_missle_deg').getSVGDocument()
-// console.log(changeMissleDeg)
 console.log(img_missle)
 img_missle.style.color = 'blue'
 
@@ -22,11 +21,7 @@ class Missle extends Component{
     this.missleOnFlying()
     this.x += this.speedX;
     this.y += this.speedY;
-    // ctx.rotate(20*Math.PI/180)
-    // this.drawMissle(ctx)
     ctx.drawImage(img_missle ,this.x, this.y, this.width, this.height);
-
-    // this.missle_fly_upward()
   }
 
   top() { return this.y }
@@ -34,12 +29,6 @@ class Missle extends Component{
   left() {return this.x }
   right() {return this.x + this.width }
 
-  // shootSth(o) {
-  //   return (!(this.top() > o.y + o.height||
-  //             this.bottom() < o.y ||
-  //             this.left() > o.x + o.width ||
-  //             this.right() < o.x))
-  // }
   missleOnFlying() {
     if (this.flyUpward && this.y > -20) {
       this.missle_fly_upward() 
@@ -58,7 +47,6 @@ class Missle extends Component{
     this.speedX = distance_x / 15;
     this.speedY = distance_y / 15;
     const absDistance_x_y = Math.abs(distance_x) + Math.abs(distance_y);
-    // console.log(absDistance_x_y)
     if (absDistance_x_y < 400 && absDistance_x_y > 200) {
       this.speedX = distance_x / 10;
       this.speedY = distance_y / 10;
@@ -75,14 +63,4 @@ class Missle extends Component{
               this.left() > o.x + o.width + 25 ||
               this.right() < o.x - 25))
   }
-
-  
-  // flyToLocatedPosition() {
-  //   // const distance_x = this.located_x - this.x;
-  //   // const distance_y = this.located_y - this.y;
-  //   this.speedX = (this.located_x - this.x) / 15;
-  //   this.speedY = (this.located_y - this.y) / 10;
-  // }
-
-
 }

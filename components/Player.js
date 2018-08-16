@@ -6,14 +6,10 @@ const img_angry = new Image()
 img_angry.src = './image/Angry.svg'
 const img = new Image()
 
-
 const img_sleep_left = new Image();
 img_sleep_left.src = './image/sleep_left.png';
-
 const img_sleep_right = new Image();
 img_sleep_right.src = './image/sleep_right.png';
-
-
 // const img_laugh = new Image();
 // img_laugh.src = './image/laugh_emoji.png'
 
@@ -45,8 +41,6 @@ class Player extends Component{
     } 
     ctx.drawImage(img, this.x, this.y, this.width, this.height);
   }
-
-
   
   moveUp() {
     if(this.y > 0 && !this.hasDizziness) { this.speedY = -25; }
@@ -77,31 +71,25 @@ class Player extends Component{
   // bullet hit obstacle or the other player
   bulletHitSth(obstacle, player, artillery) {
     this.bullet_arr.forEach((b, b_index) => {
-      // hit obstacle 
+      // hit -- obstacle 
       obstacle.obs_arr.forEach((o, o_index) => {
         if (b.shootSth(o)) {
           this.bullet_arr.splice(b_index, 1);
           obstacle.obs_arr.splice(o_index, 1);
         } 
       })
-      // hit border
+      // hit -- border
       if (b.x + b.width > 1000 || b.x < 0 || b.y < 0 || b.y + b.height > 600) {
         this.bullet_arr.splice(b_index, 1);
       }
-      // hit player
+      // hit -- player
       if (b.shootSth(player)) {
         // clear the bullet in the same row
-        // console.log('shoooooot you')
         const newArr = this.bullet_arr.filter(bullet => bullet.y !== b.y)
-        // this.bullet_arr.splice(b_index, 1)
         this.bullet_arr = [...newArr];
-        // console.log(this.health)
         player.health --;
         this.checkHealth(player)
       } 
-
-
-      
       // bulllet shoot artillery
       if (b.shootSth(artillery)) {
         this.bullet_arr.splice(b_index, 1);
@@ -110,7 +98,6 @@ class Player extends Component{
   }
 
   checkHealth(player) {
-    console.log(player.health)
     if (player.health === 0) {
       ctx.fillStyle = 'red'
       ctx.font = "bold 30px Courier New";
@@ -120,16 +107,12 @@ class Player extends Component{
   }
 
   missleBoommed(artillery) {
-
     artillery.missle_arr.map((a, i) => {
-
       if (a.inMissleShouldBoomArea(this)) {
         // set dizziness effect 
         this.hasDizziness = true;
-        console.log('before', artillery.missle_arr)
         setTimeout(()=>this.hasDizziness = false, 3000)
         artillery.missle_arr.splice(i, 1)
-        console.log('after', artillery.missle_arr)
         console.warn('i catch you ')
       }
     }) 

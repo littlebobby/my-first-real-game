@@ -71,14 +71,10 @@ start_btn.onclick = () => {
   obstacle.createRiver();
   artillery.createArtillery(ctx)
 
-
-  // obstacle.createArtillery();
 }
 
 // update canvas 
 const update = () => {
-  // console.log('100 update')
-
   frame ++;
   ctx.clearRect(0, 0, c_width, c_height)
   p1.updatePlayer(ctx, 'orange');
@@ -90,16 +86,10 @@ const update = () => {
   // check bullet 
   p1.bulletHitSth(obstacle, p2, artillery)
   p2.bulletHitSth(obstacle, p1, artillery)
-
   // check missle
   if (artillery.missle_arr.length) {
-    // need to add player 2
-    // console.log(artillery.missle_arr)
-    // console.log(frame)
-    
     p1.missleBoommed(artillery); // note!!!!!!!
     p2.missleBoommed(artillery); // note!!!!!!!
-
 
   }
   if (frame % 6 === 0) {
@@ -107,11 +97,8 @@ const update = () => {
   }
   if (frame % 100 === 0) {
       createMissile()
-      // console.log(artillery.missle_arr)
   }
-
   updateMissle()
-  
 }
 
 // create bullet 
@@ -131,10 +118,6 @@ const updateBullet = () => {
 }
 
 const createMissile = () => {
-  // const located_x = Math.floor((Math.random()*40)) *25
-  // const located_y = Math.floor((Math.random()*24)) * 25
-
-  // right now inital position 0
   const random = Math.random() - 0.5;
   const missle = new Missle(500, 275, 25, 25, 0, 0, true);
   if (random > 0) {
@@ -142,14 +125,11 @@ const createMissile = () => {
   } else {
     missle.targetP1 = false;
   }
-  // const missle = new Missle(500, 275, 25, 25, 0, 0, true);
-  // console.log('create missle in index.js called')
   artillery.missle_arr.push(missle) 
   missle.drawMissle(ctx);
 }
 const updateMissleTargetLocation = () => {
   artillery.missle_arr.map(i => {
-    // const random = Math.random() - 1;
     if (i.targetP1) {
       i.located_x = p1.x;
       i.located_y = p1.y;
@@ -157,29 +137,15 @@ const updateMissleTargetLocation = () => {
       i.located_x = p2.x;
       i.located_y = p2.y;
     }
-    
   })
-  // artillery.missle_arr = [...newArr];
-  // artillery.missle_arr[0].located_x = p1.x;
-  // artillery.missle_arr[0].located_y = p1.y;
-
 }
 const updateMissle = () => {
   if (artillery.missle_arr.length) {
     artillery.missle_arr.map(i => i.updateMissle(ctx))
-
     // update mussle target location 3 frames per time
     if (frame % 3 === 0) {
-      // console.log('100 updatemissle')
       updateMissleTargetLocation()
     }
-    
-    // artillery.missle_arr[0].updateMissle(ctx)
-    // artillery.missle_arr[0].flyToLocatedPosition()
-    // console.log(artillery.missle_arr[0]);
-    
-    // console.log('distance_x', artillery.missle_arr[0].located_x - artillery.missle_arr[0].x);
-    // console.log('distance_y', artillery.missle_arr[0].located_y - artillery.missle_arr[0].y);
   }
   
 
