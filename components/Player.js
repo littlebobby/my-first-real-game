@@ -27,6 +27,7 @@ class Player extends Component{
     this.transferable = true;
     this.isInvulnerable = false;
     this.bulletNum = 400;
+    this.canHaveNewSupplyBox = true;
   }
   createPlayer(ctx) {
     ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
@@ -156,8 +157,6 @@ class Player extends Component{
         holeObj.health --
         console.log(holeObj.health)
         holeObj.checkIfHoleDie()
-
-
       } else if (holeObj.arr[1].isPlayerEntered(this)) {
         this.x = holeObj.arr[0].x
         this.y = holeObj.arr[0].y
@@ -168,6 +167,25 @@ class Player extends Component{
       }
     }
   }
+  // ! collect supply box
+  collectSupplyBox(box_arr) {
+    if (box_arr.length !== 0) {
+      if (box_arr[0].isCollected(this)) {
+        console.log('collected ')
+        this.bulletNum += 400;
+        box_arr.shift()
+        setTimeout(() => {
+          // console.log(player)
+          console.log(this)
+          this.canHaveNewSupplyBox = true
+          console.log('new supply box is herer')
+        }, 2000);
+      }
+    }
+    
+  } 
+
+
 
   isTransferable() {
     if (!this.transferable) {
@@ -177,7 +195,7 @@ class Player extends Component{
     }
   }
 
-  // todo show bullet number
+  // * show bullet number
   showBulletNum(player) {
     if (player.x < 525) {
       ctx.fillStyle = 'ffA433'

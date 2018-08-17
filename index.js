@@ -122,6 +122,14 @@ const update = () => {
 
   // todo generate supply box
   updateSupplyBox()
+  // ! check if collected
+  p1.collectSupplyBox(supplyBox_left_arr)
+  p1.collectSupplyBox(supplyBox_left_arr)
+
+  createSupplyBox(isP1 = true)
+  createSupplyBox(isP1 = false)
+
+
 }
 
 // * bullet 
@@ -205,21 +213,24 @@ const updateBlackHole = () => {
 
 // !
 // todo create supply box
+// const createNewBox = () => {
+
+// }
 const createSupplyBox = (isP1) => {
   const supplybox = new SupplyBox();
-  if (isP1) {
+  if (isP1 && p1.canHaveNewSupplyBox) {
     supplybox.generateRandomLocation_left(ctx);
     supplyBox_left_arr.push(supplybox);
-  } else if (!isP1) {
+    p1.canHaveNewSupplyBox = false;
+  } else if (!isP1 && p2.canHaveNewSupplyBox) {
     supplybox.generateRandomLocation_right(ctx);
     supplyBox_right_arr.push(supplybox);
+    p2.canHaveNewSupplyBox = false;
   }
-
 }
 const updateSupplyBox = () => {
   supplyBox_left_arr.map(a => a.redrawSupplyBox())
   supplyBox_right_arr.map(a => a.redrawSupplyBox())
-
 }
 
 

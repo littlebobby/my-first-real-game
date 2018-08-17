@@ -32,4 +32,9 @@ class SupplyBox extends Component{
     ctx.drawImage(img_bullet, this.x, this.y, this.width, this.height);
 
   }
+
+  // ! collect supply box
+  isCollected(player) {
+    return (this.x === player.x && this.y === player.y)
+  }
 }
