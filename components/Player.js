@@ -10,6 +10,9 @@ const img_sleep_left = new Image();
 img_sleep_left.src = './image/sleep_left.png';
 const img_sleep_right = new Image();
 img_sleep_right.src = './image/sleep_right.png';
+
+const img_invulnerable = new Image();
+img_invulnerable.src = './image/invulnerable.svg';
 // const img_laugh = new Image();
 // img_laugh.src = './image/laugh_emoji.png'
 
@@ -22,6 +25,7 @@ class Player extends Component{
     this.isDead = false;
     this.hasDizziness = false;
     this.transferable = true;
+    this.isInvulnerable = false;
   }
   createPlayer(ctx) {
     ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
@@ -40,6 +44,9 @@ class Player extends Component{
     if (this.hasDizziness) {
       img.src = img_sleep_left.src;
     } 
+    if (this.isInvulnerable) {
+      img.src = img_invulnerable.src;
+    }
     ctx.drawImage(img, this.x, this.y, this.width, this.height);
   }
   
@@ -53,7 +60,7 @@ class Player extends Component{
     if(this.x < 975 && this.x !== 475 && !this.hasDizziness) { this.speedX = 25; }
   }
   moveLeft() {
-    if(this.x > 0 && this.x !== 525 && !this.hasDizziness) { this.speedX = -25; }  
+    if(this.x > 0 && this.x !== 550 && !this.hasDizziness) { this.speedX = -25; }  
   }
 
   default(x=0, y=250, width=25, height=25) {
@@ -67,6 +74,9 @@ class Player extends Component{
     this.bullet_arr = [];
     this.health = 3;
     this.isDead = false;
+    this.hasDizziness = false;
+    this.transferable = true;
+    this.isInvulnerable = false;
   }
 
   // bullet hit obstacle or the other player
@@ -84,7 +94,10 @@ class Player extends Component{
         this.bullet_arr.splice(b_index, 1);
       }
       // hit -- player
-      if (b.shootSth(player)) {
+
+
+      // ! check if is invulnerable
+      if (b.shootSth(player) && player.isInvulnerable === false) {
         // clear the bullet in the same row
         const newArr = this.bullet_arr.filter(bullet => bullet.y !== b.y)
         this.bullet_arr = [...newArr];
@@ -100,7 +113,13 @@ class Player extends Component{
   }
 
   checkHealth(player) {
-    if (player.health === 0) {
+
+    // !turn on invunerable ability
+    if (player.health === 1 && player.isInvulnerable === false) {
+      this.turnOnInvulnerable(player)
+    }
+    // ! added invulnerable test
+    if (player.health === 0 && player.isInvulnerable === false) {
       ctx.fillStyle = 'red'
       ctx.font = "bold 30px Courier New";
       ctx.fillText("↓You dead!!", player.x, player.y);
@@ -112,10 +131,14 @@ class Player extends Component{
     artillery.missle_arr.map((a, i) => {
       if (a.inMissleShouldBoomArea(this)) {
         // set dizziness effect 
-        this.hasDizziness = true;
-        setTimeout(()=>this.hasDizziness = false, 3000)
-        artillery.missle_arr.splice(i, 1)
-        console.warn('i catch you ')
+        // ! wrap to check Invulnerable 
+        if (!this.isInvulnerable) {
+          this.hasDizziness = true;
+          setTimeout(()=>this.hasDizziness = false, 3000)
+          artillery.missle_arr.splice(i, 1)
+          console.warn('i catch you ')
+        }
+        
       }
     }) 
   }
@@ -151,5 +174,20 @@ class Player extends Component{
       }, 3000);
     }
   }
+
+  // todo condition - health 1
+  turnOnInvulnerable(player) {
+    player.isInvulnerable = true;
+    console.log('yeah i am invulnerable')
+    setTimeout(() => {
+      player.health = 1;
+      console.log('called to turn off invulnerable')
+      player.isInvulnerable = false;
+    }, 10000);
+    // this.health = 1;
+    // this.hasDizziness = false;
+  }
+
+  // todo codition - health 2
   
 }

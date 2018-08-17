@@ -186,8 +186,16 @@ const updateBlackHole = () => {
   hole_right.arr.forEach(a => a.redrawBlackHole(ctx, hole_right))
 }
 
+// todo when time goes to 2 mins:
 
-// todo move player
+
+
+
+
+
+
+
+// * move player
 const keys = {};
 document.addEventListener('keydown', (e) => {
   keys[e.keyCode] = true;
