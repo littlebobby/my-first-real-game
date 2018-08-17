@@ -26,12 +26,13 @@ class Player extends Component{
     this.hasDizziness = false;
     this.transferable = true;
     this.isInvulnerable = false;
+    this.bulletNum = 400;
   }
   createPlayer(ctx) {
     ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
   }
 
-  updatePlayer(ctx, color='black') {
+  updatePlayer(player, ctx, color='black') {
     this.x += this.speedX;
     this.y += this.speedY;
     this.speedX = 0;
@@ -48,6 +49,7 @@ class Player extends Component{
       img.src = img_invulnerable.src;
     }
     ctx.drawImage(img, this.x, this.y, this.width, this.height);
+    this.showBulletNum(player)
   }
   
   moveUp() {
@@ -175,7 +177,22 @@ class Player extends Component{
     }
   }
 
-  // todo condition - health 1
+  // todo show bullet number
+  showBulletNum(player) {
+    if (player.x < 525) {
+      ctx.fillStyle = 'ffA433'
+      ctx.font = "bold 20px Courier New";
+      ctx.fillText(player.bulletNum, 10, 20)
+    } else {
+      ctx.fillStyle = 'ffA433'
+      ctx.font = "bold 20px Courier New";
+      ctx.fillText(player.bulletNum, 960, 20)
+    }
+   
+  }
+
+  // * condition - health 1 
+  // * you will have 10sec invulnerable ability - health 1
   turnOnInvulnerable(player) {
     player.isInvulnerable = true;
     console.log('yeah i am invulnerable')

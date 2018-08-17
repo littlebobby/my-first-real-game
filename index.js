@@ -80,10 +80,10 @@ start_btn.onclick = () => {
 const update = () => {
   frame ++;
   ctx.clearRect(0, 0, c_width, c_height)
-  p1.updatePlayer(ctx, 'orange');
-  p2.updatePlayer(ctx, 'blue');
   
   obstacle.updateObstacle()
+  p1.updatePlayer(p1, ctx, 'orange');
+  p2.updatePlayer(p2, ctx, 'blue');
   artillery.createArtillery(ctx)
   updateBullet()
   // check bullet 
@@ -112,12 +112,15 @@ const update = () => {
 
 // TODO bullet 
 const createBullet = (x, y, isP1 = true) => {
-  if (isP1) {
+  if (isP1 && p1.bulletNum > 0) {
     const bullet = new Bullet(x, y, 10, 3, 5, 0, 'orange');
     p1.bullet_arr.push(bullet)    
-  } else {
+    p1.bulletNum --;
+    console.log(p1.bulletNum)
+  } else if (!isP1 && p2.bulletNum > 0){
     const bullet = new Bullet(x, y, 10, 3, -5, 0, 'blue');
     p2.bullet_arr.push(bullet)
+    p2.bulletNum --;
   } 
 }
 const updateBullet = () => {
@@ -187,6 +190,10 @@ const updateBlackHole = () => {
 }
 
 // todo when time goes to 2 mins:
+
+
+
+
 
 
 
