@@ -11,6 +11,10 @@ const p1 = new Player()
 const p2 = new Player(c_width - 25, c_height/2)
 const obstacle = new Obstacle(ctx)
 const artillery = new Artillery();
+
+const supplyBox_left_arr = []
+const supplyBox_right_arr = []
+
 let frame = 0;
 // black hole array
 
@@ -74,6 +78,12 @@ start_btn.onclick = () => {
 
   // * generate the first two black hole
   createPairBlackHole()
+
+  // ! create the first 2 supply box
+  createSupplyBox(isP1 = true)
+  createSupplyBox(isP1 = false)
+
+
 }
 
 // * update canvas 
@@ -108,9 +118,13 @@ const update = () => {
   newBlackHole()
   p1.enteredIntoBlackHole(hole_left)
   p2.enteredIntoBlackHole(hole_right)
+
+
+  // todo generate supply box
+  updateSupplyBox()
 }
 
-// TODO bullet 
+// * bullet 
 const createBullet = (x, y, isP1 = true) => {
   if (isP1 && p1.bulletNum > 0) {
     const bullet = new Bullet(x, y, 10, 3, 5, 0, 'orange');
@@ -128,7 +142,7 @@ const updateBullet = () => {
   p2.bullet_arr.forEach(i => i.updateBullet())
 }
 
-// TODO missle
+// * missle
 const createMissile = () => {
   const random = Math.random() - 0.5;
   const missle = new Missle(500, 275, 25, 25, 0, 0, true);
@@ -161,7 +175,7 @@ const updateMissle = () => {
   }
 }
 
-// TODO black hole
+// * black hole
 const createPairBlackHole = () => {
   generateBlackHole(isLeft = true)
   generateBlackHole(isLeft = false)
@@ -188,6 +202,30 @@ const updateBlackHole = () => {
   hole_left.arr.forEach(a => a.redrawBlackHole(ctx, hole_left))
   hole_right.arr.forEach(a => a.redrawBlackHole(ctx, hole_right))
 }
+
+// !
+// todo create supply box
+const createSupplyBox = (isP1) => {
+  const supplybox = new SupplyBox();
+  if (isP1) {
+    supplybox.generateRandomLocation_left(ctx);
+    supplyBox_left_arr.push(supplybox);
+  } else if (!isP1) {
+    supplybox.generateRandomLocation_right(ctx);
+    supplyBox_right_arr.push(supplybox);
+  }
+
+}
+const updateSupplyBox = () => {
+  supplyBox_left_arr.map(a => a.redrawSupplyBox())
+  supplyBox_right_arr.map(a => a.redrawSupplyBox())
+
+}
+
+
+
+
+
 
 // todo when time goes to 2 mins:
 

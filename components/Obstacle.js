@@ -4,19 +4,19 @@ class Obstacle {
     this.obs_arr = [];
   }
   createObstacle() {
-    for(let i = 6; i < 20; i ++) {
+    for(let i = 6; i < 19; i ++) {
       for (let j = 0; j < 24; j ++) {
         this.createRect(i*25, j*25);
       }
     }
-    for(let i = 22; i < 35; i ++) {
+    for(let i = 21; i < 34; i ++) {
       for (let j = 0; j < 24; j ++) {
         this.createRect(i*25, j*25);
       }
     }
   }
   createRiver() {
-    for(let i = 20; i < 22; i ++) {
+    for(let i = 19; i < 21; i ++) {
       for (let j = 0; j < 11; j ++) {
         this.ctx.fillStyle = '#32d8f770';
         this.ctx.fillRect(i*25, j*25, 25, 25);

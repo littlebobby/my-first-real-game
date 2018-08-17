@@ -59,10 +59,10 @@ class Player extends Component{
     if(this.y < 575 && !this.hasDizziness) { this.speedY = 25; }
   }
   moveRight() {
-    if(this.x < 975 && this.x !== 475 && !this.hasDizziness) { this.speedX = 25; }
+    if(this.x < 975 && this.x !== 450 && !this.hasDizziness) { this.speedX = 25; }
   }
   moveLeft() {
-    if(this.x > 0 && this.x !== 550 && !this.hasDizziness) { this.speedX = -25; }  
+    if(this.x > 0 && this.x !== 525 && !this.hasDizziness) { this.speedX = -25; }  
   }
 
   default(x=0, y=250, width=25, height=25) {
