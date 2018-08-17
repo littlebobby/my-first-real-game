@@ -124,7 +124,7 @@ const update = () => {
   updateSupplyBox()
   // ! check if collected
   p1.collectSupplyBox(supplyBox_left_arr)
-  p1.collectSupplyBox(supplyBox_left_arr)
+  p2.collectSupplyBox(supplyBox_right_arr)
 
   createSupplyBox(isP1 = true)
   createSupplyBox(isP1 = false)

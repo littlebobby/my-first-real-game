@@ -204,7 +204,7 @@ class Player extends Component{
     } else {
       ctx.fillStyle = 'ffA433'
       ctx.font = "bold 20px Courier New";
-      ctx.fillText(player.bulletNum, 960, 20)
+      ctx.fillText(player.bulletNum, 900, 20)
     }
    
   }
