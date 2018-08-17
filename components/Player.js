@@ -21,6 +21,7 @@ class Player extends Component{
     this.health = 3;
     this.isDead = false;
     this.hasDizziness = false;
+    this.transferable = true;
   }
   createPlayer(ctx) {
     ctx.drawImage(img_funny, this.x, this.y, this.width, this.height);
@@ -49,7 +50,7 @@ class Player extends Component{
     if(this.y < 575 && !this.hasDizziness) { this.speedY = 25; }
   }
   moveRight() {
-    if(this.x < 975 && this.x !== 450 && !this.hasDizziness) { this.speedX = 25; }
+    if(this.x < 975 && this.x !== 475 && !this.hasDizziness) { this.speedX = 25; }
   }
   moveLeft() {
     if(this.x > 0 && this.x !== 525 && !this.hasDizziness) { this.speedX = -25; }  
@@ -90,6 +91,7 @@ class Player extends Component{
         player.health --;
         this.checkHealth(player)
       } 
+      
       // bulllet shoot artillery
       if (b.shootSth(artillery)) {
         this.bullet_arr.splice(b_index, 1);
@@ -116,7 +118,38 @@ class Player extends Component{
         console.warn('i catch you ')
       }
     }) 
+  }
 
+  enteredIntoBlackHole(holeObj) {
+    if (holeObj.arr.length === 2 && this.transferable) {
+      if (holeObj.arr[0].isPlayerEntered(this)) {
+        this.x = holeObj.arr[1].x
+        this.y = holeObj.arr[1].y
+        this.transferable = false; 
+        this.isTransferable()
+        // console.log(holeObj.health)
+        holeObj.health --
+        console.log(holeObj.health)
+        holeObj.checkIfHoleDie()
+
+
+      } else if (holeObj.arr[1].isPlayerEntered(this)) {
+        this.x = holeObj.arr[0].x
+        this.y = holeObj.arr[0].y
+        this.transferable = false; 
+        this.isTransferable();
+        holeObj.health --
+        holeObj.checkIfHoleDie()
+      }
+    }
+  }
+
+  isTransferable() {
+    if (!this.transferable) {
+      setTimeout(() => {
+        this.transferable = true;
+      }, 3000);
+    }
   }
   
 }

@@ -1,7 +1,5 @@
 const img_missle = new Image();
 img_missle.src = './image/missle.svg'
-// const changeMissleDeg = document.querySelector('#change_missle_deg').getSVGDocument()
-console.log(img_missle)
 img_missle.style.color = 'blue'
 
 class Missle extends Component{
@@ -15,13 +13,13 @@ class Missle extends Component{
 
   drawMissle(ctx) {
     ctx.drawImage(img_missle ,this.x, this.y, this.width, this.height);
-    console.log('drawMissle called');
   }
   updateMissle(ctx) {
     this.missleOnFlying()
     this.x += this.speedX;
     this.y += this.speedY;
     ctx.drawImage(img_missle ,this.x, this.y, this.width, this.height);
+
   }
 
   top() { return this.y }
@@ -39,7 +37,7 @@ class Missle extends Component{
   }
   missle_fly_upward() {
     this.speedY -= 1;
-    console.log(this.speedY)
+    // console.log(this.speedY)
   }
   missle_fly_downward() {
     const distance_x = this.located_x - this.x
@@ -50,13 +48,13 @@ class Missle extends Component{
     if (absDistance_x_y < 400 && absDistance_x_y > 200) {
       this.speedX = distance_x / 10;
       this.speedY = distance_y / 10;
-      console.log('<<<<<<<22222')
+      // console.log('<<<<<<<22222')
     } else if  (absDistance_x_y < 200) {
       this.didBoomed = true;
-      console.log('<<<<<<<111')
+      // console.log('<<<<<<<111')
     }
-    
   }
+
   inMissleShouldBoomArea(o) {
     return (!(this.top() > o.y + o.height + 25||
               this.bottom() < o.y - 25 ||

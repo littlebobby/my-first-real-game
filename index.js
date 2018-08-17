@@ -12,14 +12,15 @@ const p2 = new Player(c_width - 25, c_height/2)
 const obstacle = new Obstacle(ctx)
 const artillery = new Artillery();
 let frame = 0;
+// black hole array
 
-// BUTTON pause game
+// TODO BUTTON pause game
 pause_btn.onclick = () => {
   pause_btn.innerHTML === 'Pause' 
   ? (pause_btn.innerHTML = 'Resume', myGameArea.clear())
   : (pause_btn.innerHTML = 'Pause', myGameArea.intervalStart());
 }
-// BUTTON revive game
+// TODO revive game
 revivePlayer.onclick = () => {
   ctx.clearRect(0, 0, c_width, c_height)
   myGameArea.clear();
@@ -27,7 +28,7 @@ revivePlayer.onclick = () => {
   myGameArea.start();
   myGameArea.intervalStart();
 }
-// BUTTON restart game -- new game
+// TODO restart game -- new game
 restart_btn.onclick = () => {
   ctx.clearRect(0, 0, c_width, c_height);
   myGameArea.clear();
@@ -62,7 +63,7 @@ const myGameArea = {
   }
 }
 
-// BUTTON start game
+// TODO start game
 start_btn.onclick = () => {
   myGameArea.start()
   myGameArea.clear()
@@ -71,9 +72,11 @@ start_btn.onclick = () => {
   obstacle.createRiver();
   artillery.createArtillery(ctx)
 
+  // * generate the first two black hole
+  createPairBlackHole()
 }
 
-// update canvas 
+// * update canvas 
 const update = () => {
   frame ++;
   ctx.clearRect(0, 0, c_width, c_height)
@@ -90,7 +93,6 @@ const update = () => {
   if (artillery.missle_arr.length) {
     p1.missleBoommed(artillery); // note!!!!!!!
     p2.missleBoommed(artillery); // note!!!!!!!
-
   }
   if (frame % 6 === 0) {
     obstacle.generateRandomObstacle()
@@ -99,9 +101,16 @@ const update = () => {
       createMissile()
   }
   updateMissle()
+
+  // * update per frame
+  updateBlackHole()
+  // ! generate new blackhole per 10s after the previous did
+  newBlackHole()
+  p1.enteredIntoBlackHole(hole_left)
+  p2.enteredIntoBlackHole(hole_right)
 }
 
-// create bullet 
+// TODO bullet 
 const createBullet = (x, y, isP1 = true) => {
   if (isP1) {
     const bullet = new Bullet(x, y, 10, 3, 5, 0, 'orange');
@@ -111,12 +120,12 @@ const createBullet = (x, y, isP1 = true) => {
     p2.bullet_arr.push(bullet)
   } 
 }
-
 const updateBullet = () => {
   p1.bullet_arr.forEach(i => i.updateBullet())
   p2.bullet_arr.forEach(i => i.updateBullet())
 }
 
+// TODO missle
 const createMissile = () => {
   const random = Math.random() - 0.5;
   const missle = new Missle(500, 275, 25, 25, 0, 0, true);
@@ -147,12 +156,38 @@ const updateMissle = () => {
       updateMissleTargetLocation()
     }
   }
-  
+}
 
+// TODO black hole
+const createPairBlackHole = () => {
+  generateBlackHole(isLeft = true)
+  generateBlackHole(isLeft = false)
+  generateBlackHole(isLeft = true)
+  generateBlackHole(isLeft = false)
+
+}
+const newBlackHole = () => {
+  const blackHole = new BlackHole()
+  blackHole.canDrawHole(hole_left, ctx, blackHole)
+  blackHole.canDrawHole(hole_right, ctx, blackHole)
+}
+const generateBlackHole = (isLeft) => {
+  const blackHole = new BlackHole()
+  if (isLeft) {
+    blackHole.beforeDrawHole(hole_left, ctx, blackHole)
+  } else {
+    blackHole.beforeDrawHole(hole_right, ctx, blackHole)
+  }
+  
+  
+}
+const updateBlackHole = () => {
+  hole_left.arr.forEach(a => a.redrawBlackHole(ctx, hole_left))
+  hole_right.arr.forEach(a => a.redrawBlackHole(ctx, hole_right))
 }
 
 
-// move player
+// todo move player
 const keys = {};
 document.addEventListener('keydown', (e) => {
   keys[e.keyCode] = true;
