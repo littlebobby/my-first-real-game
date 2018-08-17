@@ -179,7 +179,7 @@ class Player extends Component{
           console.log(this)
           this.canHaveNewSupplyBox = true
           console.log('new supply box is herer')
-        }, 2000);
+        }, 20000);
       }
     }
     
