@@ -13,8 +13,9 @@ img_sleep_right.src = './image/sleep_right.png';
 
 const img_invulnerable = new Image();
 img_invulnerable.src = './image/invulnerable.svg';
-// const img_laugh = new Image();
-// img_laugh.src = './image/laugh_emoji.png'
+
+const img_laugh = new Image();
+img_laugh.src = './image/laugh.jpg'
 
 
 class Player extends Component{
@@ -26,7 +27,7 @@ class Player extends Component{
     this.hasDizziness = false;
     this.transferable = true;
     this.isInvulnerable = false;
-    this.bulletNum = 400;
+    this.bulletNum = 150;
     this.canHaveNewSupplyBox = true;
   }
   createPlayer(ctx) {
@@ -108,10 +109,11 @@ class Player extends Component{
         this.checkHealth(player)
       } 
       
-      // bulllet shoot artillery
-      if (b.shootSth(artillery)) {
-        this.bullet_arr.splice(b_index, 1);
-      }
+      // ! reserve or not
+      // ? bulllet shoot artillery
+      // if (b.shootSth(artillery)) {
+      //   this.bullet_arr.splice(b_index, 1);
+      // }
     })
   }
 
@@ -126,6 +128,12 @@ class Player extends Component{
       ctx.fillStyle = 'red'
       ctx.font = "bold 30px Courier New";
       ctx.fillText("↓You dead!!", player.x, player.y);
+      if (p1.x === player.x) {
+        ctx.drawImage(img_laugh, p2.x, p2.y, 50, 50);
+      } else if (p2.x === player.x) {
+        ctx.drawImage(img_laugh, p1.x, p1.y, 50, 50);
+      }
+      
       myGameArea.reborn()
     }
   }
@@ -137,7 +145,7 @@ class Player extends Component{
         // ! wrap to check Invulnerable 
         if (!this.isInvulnerable) {
           this.hasDizziness = true;
-          setTimeout(()=>this.hasDizziness = false, 3000)
+          setTimeout(()=>this.hasDizziness = false, 4000)
           artillery.missle_arr.splice(i, 1)
           console.warn('i catch you ')
         }
@@ -172,14 +180,14 @@ class Player extends Component{
     if (box_arr.length !== 0) {
       if (box_arr[0].isCollected(this)) {
         console.log('collected ')
-        this.bulletNum += 400;
+        this.bulletNum += 80;
         box_arr.shift()
         setTimeout(() => {
           // console.log(player)
           console.log(this)
           this.canHaveNewSupplyBox = true
           console.log('new supply box is herer')
-        }, 20000);
+        }, 15000);
       }
     }
     

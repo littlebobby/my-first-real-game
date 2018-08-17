@@ -53,7 +53,7 @@ class Obstacle {
 
   generateRandomObstacle() {
     const randomRow = Math.floor(Math.random()*(24+1)) 
-    const columnArr = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+    const columnArr = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
     const randomColumn = columnArr[Math.floor(Math.random()*columnArr.length)]
     this.ctx.clearRect(randomColumn*25, randomRow*25, 25, 25)
     this.createRect(randomColumn*25, randomRow*25);

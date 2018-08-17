@@ -104,10 +104,10 @@ const update = () => {
     p1.missleBoommed(artillery); // note!!!!!!!
     p2.missleBoommed(artillery); // note!!!!!!!
   }
-  if (frame % 6 === 0) {
+  if (frame % 9 === 0) {
     obstacle.generateRandomObstacle()
   }
-  if (frame % 100 === 0) {
+  if (frame % 150 === 0) {
       createMissile()
   }
   updateMissle()
@@ -134,15 +134,30 @@ const update = () => {
 
 // * bullet 
 const createBullet = (x, y, isP1 = true) => {
-  if (isP1 && p1.bulletNum > 0) {
-    const bullet = new Bullet(x, y, 10, 3, 5, 0, 'orange');
-    p1.bullet_arr.push(bullet)    
-    p1.bulletNum --;
-    console.log(p1.bulletNum)
-  } else if (!isP1 && p2.bulletNum > 0){
-    const bullet = new Bullet(x, y, 10, 3, -5, 0, 'blue');
-    p2.bullet_arr.push(bullet)
-    p2.bulletNum --;
+  if (isP1 && p1.bulletNum > 0 && !p1.hasDizziness) {
+    if (frame < 60*2*10) {
+      const bullet = new Bullet(x, y, 10, 3, 5, 0, 'orange');
+      p1.bullet_arr.push(bullet)    
+      p1.bulletNum --;
+    }
+    // console.log(p1.bulletNum)
+    if (frame >= 60*2*10) {
+      const bullet = new Bullet(x, y, 10, 3, 10, 0, 'orange');
+      p1.bullet_arr.push(bullet)    
+      p1.bulletNum --;
+    }
+  } else if (!isP1 && p2.bulletNum > 0 && !p2.hasDizziness){
+    if (frame < 60*2*10) {
+      const bullet = new Bullet(x, y, 10, 3, -5, 0, 'blue');
+      p2.bullet_arr.push(bullet)    
+      p2.bulletNum --;
+    }
+    // console.log(p1.bulletNum)
+    if (frame >= 60*2*10) {
+      const bullet = new Bullet(x, y, 10, 3, -10, 0, 'blue');
+      p2.bullet_arr.push(bullet)    
+      p2.bulletNum --;
+    }
   } 
 }
 const updateBullet = () => {
@@ -232,24 +247,6 @@ const updateSupplyBox = () => {
   supplyBox_left_arr.map(a => a.redrawSupplyBox())
   supplyBox_right_arr.map(a => a.redrawSupplyBox())
 }
-
-
-
-
-
-
-// todo when time goes to 2 mins:
-
-
-
-
-
-
-
-
-
-
-
 
 // * move player
 const keys = {};

@@ -28,7 +28,7 @@ class Missle extends Component{
   right() {return this.x + this.width }
 
   missleOnFlying() {
-    if (this.flyUpward && this.y > -20) {
+    if (this.flyUpward && this.y > -50) {
       this.missle_fly_upward() 
     } else {
       this.flyUpward = false;
