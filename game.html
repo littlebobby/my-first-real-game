@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>a real game</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+  <div class='container'>
+    <button id='btn-start' class='btn-start'>Start</button>
+    <button id='btn-pause' class='btn-pause'>Pause</button>
+    <button id='btn-restart' class='btn-restart'>New Game</button>
+    <button id='btn-revive' class='btn-revive'></button>
+  </div>
+  
+  <br>
+
+  <canvas id='canvas' width='1000' height='600'></canvas>
+  <p>player 1: <strong>Move</strong>: W,S,A,D <strong>Shoot</strong>: F</p>
+  <p>player 2: <strong>Move</strong>: four arrow key <strong>Shoot</strong>: P</p>
+
+
+  <script src="components/Component.js"></script>
+  <script src="components/SupplyBox.js"></script>
+  <script src="components/BlackHole.js"></script>
+  <script src="components/Artillery.js"></script>
+  <script src="components/Missle.js"></script>
+  <script src="components/Bullet.js"></script>
+  <script src='components/Obstacle.js'></script>
+  <script src='components/Player.js'></script>
+  <script src="game.js"></script>
+</body>
+</html>
