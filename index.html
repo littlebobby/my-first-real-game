@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="./button/styles/style.css">
 </head>
-<body>
-    hello here
-    <a href="./game.html">play game</a>
+<body style="position: relative; height: 100vh; margin:0;">
+    <div style="position: absolute; left: 50%; top: 50%;transform: translate(-50%, -50%);">
+        <a href="./game.html" class='button' href="#">
+          <span class='content'>Play Game</span>
+          <span class='btn_corner top-right'></span>
+          <span class='btn_corner top-left'></span>
+          <span class='btn_corner bottom-right'></span>
+          <span class='btn_corner bottom-left'></span>
+        </a>
+      </div>
 </body>
 </html>

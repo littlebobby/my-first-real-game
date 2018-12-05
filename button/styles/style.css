@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "Avenir Next";
+  src: url("../Avenir Next/.AvenirNextLTPro-Regular.otf");
+}
+body {
+  font-family: "Avenir Next", sans-serif;
+}
+
+.button {
+  position: relative;
+  width: 160px;
+  height: 45px;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 45px;
+  letter-spacing: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.button:hover:before {
+  transition: background-color 0.25s ease 0.25s;
+  background-color: #7eaccf;
+  opacity: 1;
+}
+.button:hover span {
+  height: 50%;
+  width: 50%;
+}
+.button:hover .content {
+  transition: 0.25s 0.25s;
+  color: white;
+}
+.button .content {
+  color: #7eaccf;
+}
+.button::before {
+  content: "";
+  opacity: 0;
+  display: block;
+  position: absolute;
+  background: white;
+  width: 160px;
+  height: 45px;
+  z-index: -1;
+}
+.button .btn_corner {
+  transition: all 0.25s ease-in-out;
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  border: 0 rgba(126, 172, 207, 0.6) solid;
+}
+.button .btn_corner.top-right {
+  right: -1px;
+  top: -1px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+.button .btn_corner.top-left {
+  left: -1px;
+  top: -1px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.button .btn_corner.bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+.button .btn_corner.bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+/*# sourceMappingURL=style.css.map */
