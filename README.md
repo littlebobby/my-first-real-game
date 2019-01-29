@@ -1,1 +1,1 @@
-# my-first-real-game
+It's a two player shooting game.
