@@ -4,7 +4,7 @@
 
 ## Game Scene
 
-![game scene](./examples/showcase.jpg "game scene")
+<img src="./examples/showcase.jpg" alt="drawing" width="600"/>
 
 ## Game Demo
 
