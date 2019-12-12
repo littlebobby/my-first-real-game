@@ -1,3 +1,7 @@
-It's a two player shooting game.
+# Tow-player pixel shooter game
 
-[start game](https://littlebobby.github.io/shooting-game/)
+## Game Scene
+
+![game scene](./examples/showcase.jpg "game scene")
+
+## [Start Game](https://littlebobby.github.io/shooting-game/)
