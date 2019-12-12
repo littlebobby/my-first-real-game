@@ -12,7 +12,7 @@
 
 ## Instructions
 
-Player 1
+Player 1:
 
 - Move: W, S, A, D
 - Shoot: F
