@@ -1,6 +1,6 @@
 # Tow-player pixel shooter game
 
-## [Start Game](https://xiaaoo.github.io/shooting-game/)
+## [Start Game](https://xiaaoo.github.io/shooting_game/)
 
 ## Game Scene
 
